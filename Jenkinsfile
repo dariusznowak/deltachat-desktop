@@ -1,37 +1,23 @@
 pipeline {
 
     agent any
-    stages{
+    stages
+    {
         
-        stage('Build'){
+        stage('Test') 
+        {
 
-            steps{
-
-                echo 'Building app'
-             
+            steps
+            {
+                echo 'Start testing'
                 git branch: 'Grupa04-DN297896_Lab07', url: 'https://github.com/InzynieriaOprogramowaniaAGH/MIFT2021'
-                dir('Grupy/Grupa04/DN297896/Lab07/Docker'){
-                    
+
+                dir('Grupy/Grupa04/DN297896/Lab07/Docker')
+                {
                     sh '''
                         curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o ~/docker-compose
                         chmod +x ~/docker-compose
-                        ~/docker-compose up -d chat-build
-                    ''' 
-
-                }
-            }
-        }
-        
-        stage('Test') {
-
-            steps{
-                echo 'Start testing'
-                
-                
-                dir('Grupy/Grupa04/DN297896/Lab07/Docker'){
-                    sh '''
-                       ls 
-                        ~/docker-compose up -d test-agent
+                        docker-compose up -d test-agent
                     ''' 
                 }
             }
