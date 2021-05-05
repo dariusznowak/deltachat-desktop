@@ -15,9 +15,7 @@ pipeline {
                 dir('Grupy/Grupa04/DN297896/Lab07/Docker')
                 {
                     sh '''
-                        curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o ~/docker-compose
-                        chmod +x ~/docker-compose
-                        docker-compose up -d test-agent
+                        npm test
                     ''' 
                 }
             }
