@@ -24,23 +24,23 @@ pipeline {
         }
     }
 
-
+    
     post {
 
         success {
             emailext attachLog: true, 
                 body: "Test notification: ${currentBuild.currentResult}: Job ${env.JOB_NAME}, More informations in attachment", 
-                recipientProviders: [developers()], 
+                recipientProviders: [developers(), requestor()], 
                 subject: 'Test passed', 
-                to: 'dnowak106@gmail.com'
+                to: 'nowakdariusz03@gmail.com'
         }
 
         failure {
             emailext attachLog: true, 
                 body: "Test notification: ${currentBuild.currentResult}: Job ${env.JOB_NAME}, More informations in attachment", 
-                recipientProviders: [developers()], 
+                recipientProviders: [developers(), requestor()], 
                 subject: 'Test NOT passed', 
-                to: 'dnowak106@gmail.com'
+                to: 'nowakdariusz03@gmail.com'
         }
     }
 }
