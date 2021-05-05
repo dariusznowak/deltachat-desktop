@@ -25,22 +25,20 @@ pipeline {
     }
 
     
-    post {
-
-        success {
-            emailext attachLog: true, 
-                body: "Test notification: ${currentBuild.currentResult}: Job ${env.JOB_NAME}, More informations in attachment", 
-                recipientProviders: [developers(), requestor()], 
-                subject: 'Test passed', 
-                to: 'nowakdariusz03@gmail.com'
-        }
-
+     post {
         failure {
-            emailext attachLog: true, 
-                body: "Test notification: ${currentBuild.currentResult}: Job ${env.JOB_NAME}, More informations in attachment", 
-                recipientProviders: [developers(), requestor()], 
-                subject: 'Test NOT passed', 
-                to: 'nowakdariusz03@gmail.com'
+            emailext attachLog: true,
+                body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}",
+                recipientProviders: [developers(), requestor()],
+                to: 'nowakdariusz03@gmail.com',
+                subject: "Build failed in Jenkins ${currentBuild.currentResult}: Job ${env.JOB_NAME}"
+        }
+        success {
+            emailext attachLog: true,
+                body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}",
+                recipientProviders: [developers(), requestor()],
+                to: 'nowakdariusz03@gmail.com',
+                subject: "Successful build in Jenkins ${currentBuild.currentResult}: Job ${env.JOB_NAME}"
         }
     }
 }
