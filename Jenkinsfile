@@ -15,6 +15,7 @@ pipeline {
                 dir('Grupy/Grupa04/DN297896/Lab07/Docker')
                 {
                     sh '''
+                        npm install
                         npm test
                     ''' 
                 }
