@@ -4,7 +4,7 @@ pipeline {
         stage('Build') { 
             steps {
                 sh 'git pull origin master'
-                sh 'npm install'
+                sh 'npm install npm@latest -g'
                 sh 'npm build'
             }
             post {
