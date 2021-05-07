@@ -3,12 +3,28 @@ pipeline {
     agent any
     stages
     {
-        
+        stage('Build') 
+        {
+
+            steps
+            {
+                echo 'Start building'
+                script {
+                    currentBuild.result = 'UNSTABLE'
+                }
+            }
+        }
+
         stage('Test') 
         {
 
             steps
             {
+                script {
+                    if (currentBuild.result == 'UNSTABLE')
+                        error('Build failure')
+                }
+
                 echo 'Start testing'
                 git branch: 'Grupa04-DN297896_Lab07', url: 'https://github.com/InzynieriaOprogramowaniaAGH/MIFT2021'
 
