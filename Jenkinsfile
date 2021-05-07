@@ -6,7 +6,7 @@ pipeline {
             steps {
                 sh 'git pull origin master'
                 sh 'npm install npm@latest -g'
-                sh 'npm build'
+                sh 'npm run build'
             }
             post {
         failure {
