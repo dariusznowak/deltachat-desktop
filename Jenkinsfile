@@ -48,6 +48,31 @@ pipeline {
         }
     }
         }
+    stage('Deploy')
+        {
+        	steps
+        	{
+        		sh 'docker build -t deploy -f Deploy-dockerfile .'
+        	}
+        	post
+        	{
+        	failure 
+                    {
+                    emailext attachLog: true,
+                    body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}",
+                        recipientProviders: [developers(), requestor()],
+                        to: 'nowakdariusz03@gmail.com',
+                    subject: "Deploy failed in Jenkins ${currentBuild.currentResult}: Job ${env.JOB_NAME}"
+                    }
+                success 
+                    {
+                    emailext attachLog: true,
+                    body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}",
+                        recipientProviders: [developers(), requestor()],
+                        to: 'nowakdariusz03@gmail.com',
+                    subject: "Successful deploy in Jenkins ${currentBuild.currentResult}: Job ${env.JOB_NAME}"
+                    }
+        	}
+        }
     }
-
 }
