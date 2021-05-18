@@ -1,4 +1,4 @@
-# deltachat-desktop
+# deltachat-desktop.
 
 **Desktop Application for [delta.chat](https://delta.chat)**
 
