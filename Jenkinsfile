@@ -52,7 +52,7 @@ pipeline {
         {
         	steps
         	{
-        		sh 'docker build -t deploy -f Deploy-dockerfile .'
+        		sh 'docker build -t deploy -f Dockerfile-deploy .'
         	}
         	post
         	{
